@@ -8,5 +8,11 @@ def homepage():
     return render_template("index.html")
 
 
+@app.route('/')
+def homepage():
+    movies = []
+    return render_template("homepage.html", movies=movies)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
