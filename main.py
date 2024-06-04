@@ -5,7 +5,6 @@ from tmdb_client import get_poster_url, get_movies_list, get_single_movie, get_s
 
 app = Flask(__name__)
 
-
 LIST_TYPES = ['top_rated', 'upcoming', 'popular', 'now_playing']
 
 
@@ -20,6 +19,7 @@ def get_movies(how_many, list_type):
 def utility_processor():
     def tmdb_image_url(path, size):
         return get_poster_url(path, size)
+
     return {"tmdb_image_url": tmdb_image_url}
 
 
