@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import random
 
-from movies_catalogue import tmdb_client
 from tmdb_client import get_poster_url, get_movies_list, get_single_movie, get_single_movie_cast, get_movie_images
 
 app = Flask(__name__)
@@ -35,8 +34,11 @@ def homepage():
 
 @app.route("/movie/<movie_id>")
 def movie_details(movie_id):
-    details = tmdb_client.get_single_movie(movie_id)
-    return render_template("movie_details.html", movie=details)
+    details = get_single_movie(movie_id)
+    cast = get_single_movie_cast(movie_id)
+    movie_images = get_movie_images(movie_id)
+    selected_backdrop = random.choice(movie_images['backdrops'])
+    return render_template("movie_details.html", movie=details, cast=cast, selected_backdrop=selected_backdrop)
 
 
 if __name__ == "__main__":
